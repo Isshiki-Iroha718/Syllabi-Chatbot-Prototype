@@ -8,7 +8,7 @@
         // Check whether the local storage has the previous information
         window.onload = function() {
             const savedHistory = JSON.parse(localStorage.getItem("history")) || [];
-            // 如果有历史记录，显示在页面中
+            // If it contains history in the local storage, display them
             if (savedHistory.length > 0) {
                 savedHistory.forEach(item => {
                     addHistory(item.message, item.result);
@@ -43,6 +43,9 @@
 
                 // Update the query history
                 addHistory(message, data.message);
+
+                 // Clear the message field after sending
+                document.getElementById('message').value = '';  // Clear the textarea
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -67,8 +70,8 @@
 <body>
     <h1>Syllabi Chatbot</h1>
 
-    <label for="message">Hello. What can I do for you?</label>
-    <input type="text" id="message" placeholder="..." />
+    <label for="message">Hello. What can I do for you?</label><br>
+    <textarea id="message" placeholder="..." rows="6" cols="50"></textarea><br>
     <button onclick="sendMessage()">Send</button>
 
     <h2>Response</h2>
